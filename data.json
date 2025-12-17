@@ -1,0 +1,33 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Akun ML Sultan",
+      "price": 350000,
+      "rating": 4.9,
+      "status": "ready",
+      "desc": "Mythic Glory, skin epic, email aman",
+      "wa": "628123456789",
+      "images": [
+        "https://picsum.photos/400/300?1",
+        "https://picsum.photos/400/300?2",
+        "https://picsum.photos/400/300?3"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Akun FF Rare",
+      "price": 180000,
+      "rating": 4.7,
+      "status": "sold",
+      "desc": "Bundle langka, senjata full",
+      "wa": "628123456789",
+      "images": [
+        "https://picsum.photos/400/300?4",
+        "https://picsum.photos/400/300?5"
+      ]
+    }
+  ]
+}
+
+ 

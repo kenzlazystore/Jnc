@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RapStore Ultra Premium</title><!-- =============================
+     GLOBAL STYLE & THEME
+============================= --><style>
+:root{
+  --bg:#05070f;
+  --panel:#0b1020;
+  --card:#10172a;
+  --accent:#22c55e;
+  --danger:#ef4444;
+  --info:#3b82f6;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:linear-gradient(180deg,#020617,#05070f);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* =============================
+   HEADER
+============================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:99;
+  background:rgba(2,6,23,.85);
+  backdrop-filter:blur(14px);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+header .logo{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+header .status{
+  padding:6px 14px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#022c22;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* =============================
+   CONTAINER
+============================= */
+.container{
+  padding:20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.search-box{
+  margin-bottom:18px;
+}
+.search-box input{
+  width:100%;
+  padding:14px 18px;
+  border-radius:var(--radius);
+  border:none;
+  outline:none;
+  background:#020617;
+  color:var(--text);
+  font-size:15px;
+}
+
+/* =============================
+   GRID PRODUK
+============================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:linear-gradient(180deg,#0b1020,#070b16);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow:0 25px 45px rgba(0,0,0,.45);
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:.3s ease;
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.04),transparent);
+  opacity:0;
+  transition:.3s;
+}
+.card:hover::after{opacity:1}
+
+.thumb{
+  height:160px;
+  border-radius:14px;
+  overflow:hidden;
+}
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s;
+}
+.card:hover .thumb img{transform:scale(1.08)}
+
+.badge{
+  position:absolute;
+  top:14px;
+  left:14px;
+  padding:6px 12px;
+  font-size:11px;
+  font-weight:900;
+  border-radius:999px;
+}
+.badge.ready{background:var(--accent);color:#022c22}
+.badge.sold{background:var(--danger)}
+
+.card h3{
+  margin:10px 0 4px;
+  font-size:16px;
+}
+.price{
+  font-weight:900;
+  color:var(--accent);
+}
+.rating{
+  font-size:13px;
+  color:gold;
+}
+
+/* =============================
+   MODAL DETAIL (VEXA STYLE)
+============================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:200;
+}
+.modal.active{display:flex}
+
+.modal-box{
+  width:95%;
+  max-width:560px;
+  background:linear-gradient(180deg,#0b1020,#070b16);
+  border-radius:22px;
+  padding:18px;
+  animation:pop .35s ease;
+}
+@keyframes pop{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.slider{
+  height:280px;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+}
+.slider img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:.5s;
+}
+.slider img.active{opacity:1}
+
+.modal h2{
+  margin:12px 0 4px;
+}
+.modal .desc{
+  font-size:14px;
+  color:var(--muted);
+}
+.modal .price{
+  font-size:22px;
+  margin:10px 0;
+}
+
+.btn-wa{
+  display:block;
+  text-align:center;
+  padding:16px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#022c22;
+  font-weight:900;
+  text-decoration:none;
+}
+
+.close{
+  text-align:center;
+  margin-top:10px;
+  color:var(--muted);
+  cursor:pointer;
+}
+
+/* =============================
+   FOOTER
+============================= */
+footer{
+  text-align:center;
+  padding:30px 10px;
+  color:#64748b;
+  font-size:12px;
+}
+</style></head>
+<body><header>
+  <div class="logo">⚡ RAPSTORE ULTRA</div>
+  <div class="status">ONLINE</div>
+</header><div class="container">
+  <div class="search-box">
+    <input id="search" placeholder="Cari akun / game / item...">
+  </div>
+  <div id="grid" class="grid"></div>
+</div><footer>© 2025 RapStore Premium — Auto JSON</footer><!-- =============================
+     MODAL DETAIL
+============================= --><div id="modal" class="modal">
+  <div class="modal-box">
+    <div id="slider" class="slider"></div>
+    <h2 id="mTitle"></h2>
+    <div class="rating" id="mRating"></div>
+    <div class="price" id="mPrice"></div>
+    <div class="desc" id="mDesc"></div>
+    <a id="mWA" class="btn-wa" target="_blank">Chat WhatsApp</a>
+    <div class="close" onclick="closeModal()">Tutup</div>
+  </div>
+</div><!-- =============================
+     SCRIPT CORE
+============================= --><script>
+let PRODUCTS=[];
+let slideTimer;
+
+fetch('data.json')
+.then(r=>r.json())
+.then(d=>{
+  PRODUCTS=d.products;
+  render();
+});
+
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+  PRODUCTS.filter(p=>p.name.toLowerCase().includes(q))
+  .forEach(p=>{
+    grid.innerHTML+=`
+    <div class="card" onclick="openModal(${p.id})">
+      <span class="badge ${p.status}">${p.status.toUpperCase()}</span>
+      <div class="thumb"><img src="${p.images[0]}"></div>
+      <h3>${p.name}</h3>
+      <div class="price">Rp${p.price.toLocaleString()}</div>
+      <div class="rating">⭐ ${p.rating}</div>
+    </div>`;
+  });
+}
+
+function openModal(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  document.getElementById('modal').classList.add('active');
+  document.getElementById('mTitle').innerText=p.name;
+  document.getElementById('mDesc').innerText=p.desc;
+  document.getElementById('mPrice').innerText='Rp'+p.price.toLocaleString();
+  document.getElementById('mRating').innerText='⭐ '+p.rating;
+  document.getElementById('mWA').href='https://wa.me/'+p.wa;
+
+  const slider=document.getElementById('slider');
+  slider.innerHTML='';
+  p.images.forEach((img,i)=>{
+    slider.innerHTML+=`<img src="${img}" class="${i==0?'active':''}">`;
+  });
+
+  let i=0;
+  clearInterval(slideTimer);
+  slideTimer=setInterval(()=>{
+    const imgs=slider.querySelectorAll('img');
+    imgs.forEach(x=>x.classList.remove('active'));
+    i=(i+1)%imgs.length;
+    imgs[i].classList.add('active');
+  },2600);
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('active');
+}
+
+document.getElementById('search').addEventListener('input',render);
+<!-- =============================
+     ADMIN PANEL (HIDDEN)
+============================= -->
+<div id="adminPanel" style="display:none;position:fixed;inset:0;background:#000000dd;z-index:500;overflow:auto;">
+  <div style="max-width:520px;margin:40px auto;background:#0b1020;padding:20px;border-radius:20px">
+    <h2>🔐 ADMIN PANEL</h2>
+
+    <input id="aName" placeholder="Nama Produk" style="width:100%;padding:12px;margin:6px 0">
+    <input id="aPrice" placeholder="Harga" type="number" style="width:100%;padding:12px;margin:6px 0">
+    <input id="aRating" placeholder="Rating" step="0.1" type="number" style="width:100%;padding:12px;margin:6px 0">
+
+    <select id="aStatus" style="width:100%;padding:12px;margin:6px 0">
+      <option value="ready">READY</option>
+      <option value="sold">SOLD</option>
+    </select>
+
+    <textarea id="aDesc" placeholder="Deskripsi" style="width:100%;padding:12px;margin:6px 0"></textarea>
+    <input id="aImages" placeholder="Link gambar (pisahkan koma)" style="width:100%;padding:12px;margin:6px 0">
+    <input id="aWA" placeholder="Nomor WA" style="width:100%;padding:12px;margin:6px 0">
+
+    <button onclick="addProduct()" style="width:100%;padding:14px;margin-top:10px;background:#22c55e;border:none;border-radius:12px;font-weight:900">
+      ➕ TAMBAH PRODUK
+    </button>
+
+    <div onclick="closeAdmin()" style="text-align:center;margin-top:10px;color:#94a3b8;cursor:pointer">
+      Tutup Admin
+    </div>
+  </div>
+</div>
+<script>
+
+<script>
+let tapCount = 0;
+let tapTimer;
+
+document.querySelector(".logo").addEventListener("click", () => {
+  tapCount++;
+  clearTimeout(tapTimer);
+
+  tapTimer = setTimeout(() => tapCount = 0, 1200);
+
+  if (tapCount === 5) {
+    const pass = prompt("Password Admin:");
+    if (pass === ADMIN_PASS) {
+      document.getElementById("adminPanel").style.display = "block";
+    } else {
+      alert("Password salah!");
+    }
+    tapCount = 0;
+  }
+});
+<script>
+document.getElementById("adminTrigger").addEventListener("click",()=>{
+  const pass=prompt("Password Admin:");
+  if(pass===ADMIN_PASS){
+    document.getElementById("adminPanel").style.display="block";
+  }else{
+    alert("Password salah!");
+  }
+});
+
+</script>
+</script>
+</script></body>
+</html>
